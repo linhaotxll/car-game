@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小车移动</title>
+    <style>
+      html, body, #root {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <script type="module">
+      import PageLoading from '~/components/Common/PageLoading'
+      customElements.define('page-loading', PageLoading)
+    </script>
+    <div id="root">
+      <page-loading></page-loading>
+    </div>
+
+    <script type="module" src="/js/webrtcstreamer.js"></script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

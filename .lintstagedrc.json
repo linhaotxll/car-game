@@ -1,0 +1,4 @@
+{
+  "*.{js|cjs|mjs|jsx|ts|tsx|vue}": ["pnpm run lint:fix"],
+  "*.{less|scss|sass|css|html|vue}": ["pnpm run lint:style:fix"]
+}
