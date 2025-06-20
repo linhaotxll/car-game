@@ -7,6 +7,11 @@ declare module '*.vue' {
   export default component
 }
 
+declare module '*.glsl' {
+  const content: string
+  export default content
+}
+
 /**
  * 扩展自定义 env
  */

@@ -26,10 +26,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "allowJs": true,
+
     "types": [],
 
     "paths": {
-      "@/*": ["./src/*"]
+      "~/*": ["./src/*"]
     },
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],

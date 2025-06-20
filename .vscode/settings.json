@@ -28,7 +28,7 @@
   ],
 
   // stylelint
-  "stylelint.enable": true,
+  "stylelint.enable": false,
   "stylelint.validate": [
     "css",
     "less",

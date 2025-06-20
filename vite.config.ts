@@ -5,19 +5,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { visualizer } from 'rollup-plugin-visualizer'
 import unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import { FileSystemIconLoader } from 'unplugin-icons/loaders'
-import IconsResolver from 'unplugin-icons/resolver'
-import Icons from 'unplugin-icons/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
-import { transformLazyShow } from 'v-lazy-show'
-import { defineConfig, loadEnv } from 'vite'
-import dynamicImport from 'vite-plugin-dynamic-import'
-import { viteMockServe } from 'vite-plugin-mock'
+import { defineConfig } from 'vite'
 import VueDevTools from 'vite-plugin-vue-devtools'
-
-
-import type { ProxyOptions } from 'vite'
 
 const root = __dirname
 const resolve = (...p: string[]) => path.resolve(root, ...p)
@@ -30,22 +21,12 @@ export function kebabCase (key: string) {
     .toLowerCase()
 }
 
-
-
 // 自定义原生 tag 列表
 const customElement: string[] = ['page-loading']
 
 const assetsDir = 'assets'
 
-export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd())
-
-  const proxyPrefix: Record<string, number | undefined> = {
-    [`${env.VITE_SYSTEM_VIDEO_PREFIX}`]: 6070,
-    [`${env.VITE_SYSTEM_SERVER_PREFIX}`]: undefined,
-  }
-
-
+export default defineConfig(() => {
   return {
     resolve: {
       alias: {
@@ -81,7 +62,6 @@ export default defineConfig(({ command, mode }) => {
         template: {
           compilerOptions: {
             isCustomElement: tag => customElement.includes(tag),
-            nodeTransforms: [transformLazyShow],
           },
         },
       }),

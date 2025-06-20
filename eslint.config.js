@@ -16,6 +16,7 @@ import {
   unocss,
   vue,
 } from '@antfu/eslint-config'
+import importPlugin from 'eslint-plugin-import'
 
 const autoImport = JSON.parse(readFileSync(new URL(
   './.eslintrc-auto-import.json',
@@ -27,6 +28,7 @@ const autoImport = JSON.parse(readFileSync(new URL(
  */
 const stylisticOptions = { jsx: true }
 
+// eslint-disable-next-line antfu/no-top-level-await
 export default await combine(
   ignores(),
   javascript(),
@@ -72,6 +74,9 @@ export default await combine(
 
   // import order
   {
+    plugins: {
+      import: importPlugin,
+    },
     rules: {
       'import/order': [
         'error',
