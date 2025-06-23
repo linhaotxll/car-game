@@ -42,7 +42,6 @@ export class World {
   build (resources: Record<string, any>) {
     // 地图场景
     const playground = resources['model-playground'].scene
-    console.log('playground: ', playground)
 
     // 对地图场景里的每个元素进行遍历处理
     const models = [...playground.children]
