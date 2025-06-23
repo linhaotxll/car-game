@@ -2,7 +2,9 @@ import { AxesHelper, Scene, SRGBColorSpace, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/Addons.js'
 
 import { Camera } from './Camera'
+import { Carousel } from './Carousel'
 import { Repeats } from './Repeats'
+import { Windmill } from './Windmill'
 
 import { createMapcatMaterial } from '~/materials/matcap'
 
@@ -16,6 +18,10 @@ export class World {
   renderder!: WebGLRenderer
 
   camera!: Camera
+
+  carousel = new Carousel()
+
+  windmill = new Windmill()
 
   canvas: HTMLCanvasElement
 
@@ -62,6 +68,16 @@ export class World {
       if (this.repeats.contains(data.name)) {
         this.repeats.add(data.name, model)
       }
+
+      // 处理风车
+      if (data.name === 'windmill') {
+        this.windmill.add(model)
+      }
+
+      // 旋转木马
+      if (data.name === 'carousel-rotation') {
+        this.carousel.add(model)
+      }
     }
 
     this.scene.add(playground)
@@ -69,11 +85,19 @@ export class World {
     // 构建重复元素
     this.repeats.build()
     this.scene.add(this.repeats.main)
+
+    // 构建旋转木马
+    this.carousel.build()
+    // debugger
+    this.scene.add(this.carousel.main)
   }
 
   private render () {
     // console.log(111, this.scene.children)
     this.renderder.render(this.scene, this.camera.main)
+
+    this.windmill.render()
+    this.carousel.render()
   }
 
   private initialRenderer () {
