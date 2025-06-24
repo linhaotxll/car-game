@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js'
 
 import { Camera } from './Camera'
 import { Carousel } from './Carousel'
+import { DropTower } from './DropTower'
 import { Repeats } from './Repeats'
 import { Ship } from './Ship'
 import { Windmill } from './Windmill'
@@ -19,6 +20,8 @@ export class World {
   renderder!: WebGLRenderer
 
   camera!: Camera
+
+  dropTower = new DropTower()
 
   carousel = new Carousel()
 
@@ -58,6 +61,8 @@ export class World {
     for (const model of models) {
       const data = model.userData
 
+      // console.log(data.name, model)
+
       // 处理 matcap 元素，进行贴图
       if (data.matcap) {
         model.material = createMapcatMaterial(resources[`matcap-${data.matcap}`])
@@ -86,6 +91,11 @@ export class World {
       if (data.name.includes('ship')) {
         this.ship.add(model)
       }
+
+      // 跳楼机
+      if (data.name.includes('drop-rotation')) {
+        this.dropTower.add(model)
+      }
     }
 
     this.scene.add(playground)
@@ -101,6 +111,10 @@ export class World {
     // 构建海盗船
     this.ship.build()
     this.scene.add(this.ship.main)
+
+    // 构建跳楼机
+    this.dropTower.build()
+    this.scene.add(this.dropTower.main)
   }
 
   private render () {
@@ -110,6 +124,7 @@ export class World {
     this.windmill.render()
     this.carousel.render()
     this.ship.render()
+    this.dropTower.render()
   }
 
   private initialRenderer () {
