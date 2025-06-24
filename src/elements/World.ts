@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js'
 import { Camera } from './Camera'
 import { Carousel } from './Carousel'
 import { DropTower } from './DropTower'
+import { DropUp } from './DropUp'
 import { Repeats } from './Repeats'
 import { Ship } from './Ship'
 import { Windmill } from './Windmill'
@@ -22,6 +23,8 @@ export class World {
   camera!: Camera
 
   dropTower = new DropTower()
+
+  dropUp = new DropUp()
 
   carousel = new Carousel()
 
@@ -96,6 +99,11 @@ export class World {
       if (data.name.includes('drop-rotation')) {
         this.dropTower.add(model)
       }
+
+      // 升降机
+      if (data.name === 'drop-up-seat') {
+        this.dropUp.add(model)
+      }
     }
 
     this.scene.add(playground)
@@ -115,6 +123,10 @@ export class World {
     // 构建跳楼机
     this.dropTower.build()
     this.scene.add(this.dropTower.main)
+
+    // 构建升降机
+    this.dropUp.build()
+    this.scene.add(this.dropUp.main)
   }
 
   private render () {
@@ -125,6 +137,7 @@ export class World {
     this.carousel.render()
     this.ship.render()
     this.dropTower.render()
+    this.dropUp.render()
   }
 
   private initialRenderer () {
