@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js'
 import { Camera } from './Camera'
 import { Carousel } from './Carousel'
 import { Repeats } from './Repeats'
+import { Ship } from './Ship'
 import { Windmill } from './Windmill'
 
 import { createMapcatMaterial } from '~/materials/matcap'
@@ -22,6 +23,8 @@ export class World {
   carousel = new Carousel()
 
   windmill = new Windmill()
+
+  ship = new Ship()
 
   canvas: HTMLCanvasElement
 
@@ -78,6 +81,11 @@ export class World {
       if (data.name === 'carousel-rotation') {
         this.carousel.add(model)
       }
+
+      // 海盗船
+      if (data.name.includes('ship')) {
+        this.ship.add(model)
+      }
     }
 
     this.scene.add(playground)
@@ -88,8 +96,11 @@ export class World {
 
     // 构建旋转木马
     this.carousel.build()
-    // debugger
     this.scene.add(this.carousel.main)
+
+    // 构建海盗船
+    this.ship.build()
+    this.scene.add(this.ship.main)
   }
 
   private render () {
@@ -98,6 +109,7 @@ export class World {
 
     this.windmill.render()
     this.carousel.render()
+    this.ship.render()
   }
 
   private initialRenderer () {
