@@ -5,6 +5,7 @@ import { Camera } from './Camera'
 import { Carousel } from './Carousel'
 import { DropTower } from './DropTower'
 import { DropUp } from './DropUp'
+import { FerrisWheel } from './FerrisWheel'
 import { Repeats } from './Repeats'
 import { Ship } from './Ship'
 import { Windmill } from './Windmill'
@@ -23,6 +24,8 @@ export class World {
   camera!: Camera
 
   dropTower = new DropTower()
+
+  ferrisChair = new FerrisWheel()
 
   dropUp = new DropUp()
 
@@ -104,6 +107,11 @@ export class World {
       if (data.name === 'drop-up-seat') {
         this.dropUp.add(model)
       }
+
+      // 摩天轮
+      if (data.name.includes('ferris')) {
+        this.ferrisChair.add(model)
+      }
     }
 
     this.scene.add(playground)
@@ -127,6 +135,10 @@ export class World {
     // 构建升降机
     this.dropUp.build()
     this.scene.add(this.dropUp.main)
+
+    // 构建摩天轮
+    this.ferrisChair.build()
+    this.scene.add(this.ferrisChair.main)
   }
 
   private render () {
@@ -138,6 +150,7 @@ export class World {
     this.ship.render()
     this.dropTower.render()
     this.dropUp.render()
+    this.ferrisChair.render()
   }
 
   private initialRenderer () {
