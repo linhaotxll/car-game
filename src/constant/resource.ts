@@ -122,4 +122,9 @@ export const RESOURCE_LIST: Resouece[] = [
     type: LoaderTypeEnum.Texture,
     path: '/matcaps/yellow.png',
   },
+  {
+    name: 'texture-shadow',
+    type: LoaderTypeEnum.Texture,
+    path: '/textures/shadows.jpg',
+  },
 ]

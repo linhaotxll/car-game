@@ -10,6 +10,7 @@ import { Repeats } from './Repeats'
 import { Ship } from './Ship'
 import { Windmill } from './Windmill'
 
+import { createGroundShadow } from '~/materials/groundShadow'
 import { createMapcatMaterial } from '~/materials/matcap'
 
 interface WorldOptions {
@@ -71,12 +72,14 @@ export class World {
 
       // 处理 matcap 元素，进行贴图
       if (data.matcap) {
+        // console.log(model)
         model.material = createMapcatMaterial(resources[`matcap-${data.matcap}`])
       }
 
-      // if (data['shadow-color']) {
-      //   console.log(model)
-      // }
+      // 处理地板
+      if (data['shadow-color']) {
+        model.material = createGroundShadow(resources['texture-shadow'], data['shadow-color'])
+      }
 
       // 处理可重复元素
       if (this.repeats.contains(data.name)) {
